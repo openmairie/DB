@@ -991,7 +991,7 @@ class DB_pgsql extends DB_common
             $flags  = ($row[0] == 't') ? 'not_null ' : '';
 
             if ($row[1] == 't') {
-                $result = @pg_query($this->connection, "SELECT a.adsrc
+                $result = @pg_query($this->connection, "SELECT pg_get_expr(a.adbin, a.adrelid)
                                     FROM $from, pg_attrdef a
                                     WHERE tab.relname = typ.typname AND typ.typrelid = f.attrelid
                                     AND f.attrelid = a.adrelid AND f.attname = '$field_name'
